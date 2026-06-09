@@ -1,0 +1,180 @@
+configs:
+  - id: C01
+    cluster: OFI
+    paradigm: B
+    main_signal: OFI_NET
+    tau_level: short
+    env_dims: []
+    total_dim: 2
+    embed_order: 2
+    h1_segments: [FULL, OPEN]
+    h0_segments: [FULL, OPEN]
+    directions: [null, BUY, SELL]
+
+  - id: C02
+    cluster: OFI
+    paradigm: B
+    main_signal: OFI_NET
+    tau_level: mid
+    env_dims: []
+    total_dim: 2
+    embed_order: 2
+    h1_segments: [FULL, OPEN]
+    h0_segments: [FULL, OPEN]
+    directions: [null, BUY, SELL]
+
+  - id: C03
+    cluster: OFI
+    paradigm: B
+    main_signal: OFI_NET
+    tau_level: long
+    env_dims: []
+    total_dim: 2
+    embed_order: 2
+    h1_segments: [FULL]
+    h0_segments: [FULL]
+    directions: [null, BUY, SELL]
+
+  - id: C04
+    cluster: OFI
+    paradigm: C
+    main_signal: OFI_NET
+    tau_level: mid
+    env_dims: [SPREAD]
+    total_dim: 3
+    embed_order: 2
+    h1_segments: [FULL]
+    h0_segments: [FULL]
+    directions: [null]
+
+  - id: C05
+    cluster: OFI
+    paradigm: C
+    main_signal: OFI_NET
+    tau_level: mid
+    env_dims: [DEPTH5]
+    total_dim: 3
+    embed_order: 2
+    h1_segments: [FULL, OPEN]
+    h0_segments: [FULL, OPEN]
+    directions: [null, BUY, SELL]
+
+  - id: C07
+    cluster: IMBAL
+    paradigm: B
+    main_signal: OB_IMBAL
+    tau_level: short
+    env_dims: []
+    total_dim: 2
+    embed_order: 2
+    h1_segments: [FULL, OPEN]
+    h0_segments: [FULL, OPEN]
+    directions: [null]
+
+  - id: C08
+    cluster: IMBAL
+    paradigm: B
+    main_signal: OB_IMBAL
+    tau_level: mid
+    env_dims: []
+    total_dim: 2
+    embed_order: 2
+    h1_segments: [FULL, OPEN]
+    h0_segments: [FULL, OPEN]
+    directions: [null]
+
+  - id: C09
+    cluster: IMBAL
+    paradigm: C
+    main_signal: OB_IMBAL
+    tau_level: mid
+    env_dims: [SPREAD]
+    total_dim: 3
+    embed_order: 2
+    h1_segments: [FULL]
+    h0_segments: [FULL]
+    directions: [null]
+
+  - id: C11
+    cluster: PRICE
+    paradigm: B
+    main_signal: DP_MICRO
+    tau_level: short
+    env_dims: []
+    total_dim: 2
+    embed_order: 2
+    h1_segments: [FULL]
+    h0_segments: [FULL]
+    directions: [null]
+
+  - id: C12
+    cluster: PRICE
+    paradigm: B
+    main_signal: DP_MICRO
+    tau_level: mid
+    env_dims: []
+    total_dim: 2
+    embed_order: 2
+    h1_segments: [FULL]
+    h0_segments: [FULL]
+    directions: [null]
+
+  - id: C13
+    cluster: PRICE
+    paradigm: C
+    main_signal: DP_MICRO
+    tau_level: mid
+    env_dims: [RV_PROXY]
+    total_dim: 3
+    embed_order: 2
+    h1_segments: [FULL]
+    h0_segments: [FULL]
+    directions: [null]
+
+  - id: C14
+    cluster: PRICE
+    paradigm: C
+    main_signal: DP_MICRO
+    tau_level: mid
+    env_dims: [SPREAD, DEPTH5]
+    total_dim: 4
+    embed_order: 2
+    h1_segments: [FULL]
+    h0_segments: [FULL]
+    directions: [null]
+
+  - id: C15
+    cluster: CANCEL
+    paradigm: B
+    main_signal: CANCEL_NET
+    tau_level: mid
+    env_dims: []
+    total_dim: 2
+    embed_order: 2
+    h1_segments: [FULL]
+    h0_segments: [FULL]
+    directions: [null, BUY, SELL]
+
+  - id: C16
+    cluster: CANCEL
+    paradigm: C
+    main_signal: CANCEL_NET
+    tau_level: mid
+    env_dims: [CANCEL_RATE]
+    total_dim: 3
+    embed_order: 2
+    h1_segments: [FULL, OPEN]
+    h0_segments: [FULL, OPEN]
+    directions: [null, BUY, SELL]
+
+  - id: C17
+    cluster: CANCEL
+    paradigm: C
+    main_signal: CANCEL_NET
+    tau_level: mid
+    env_dims: [LIFE_TIME]
+    total_dim: 3
+    embed_order: 2
+    h1_segments: [FULL]
+    h0_segments: [FULL]
+    directions: [null, BUY, SELL]
