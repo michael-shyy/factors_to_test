@@ -7,30 +7,20 @@ lz76.py — LZ76 复杂度核心算法。
 多符号 (alphabet_size=k): C_norm = C * log2(k) * log2(n) / n
 """
 import numpy as np
-from numba import njit
 
 
-@njit(cache=True)
 def _lz76_count(seq: np.ndarray) -> int:
-    """LZ76 扫描，统计新子串个数 C。"""
+    """LZ76 扫描，统计新子串个数 C。O(n²)：用 bytes.find 做子串搜索。
+
+    搜索范围：在 history = seq[0:i] 中找 seq[i:i+k]，严格无前视。
+    """
     n = len(seq)
     if n == 0:
         return 0
-    c = 1
-    i = 0
-    k = 1
+    s = bytes(seq.tolist())
+    c, i, k = 1, 0, 1
     while i + k <= n:
-        found = False
-        for j in range(i - k + 1):
-            match = True
-            for d in range(k):
-                if seq[j + d] != seq[i + d]:
-                    match = False
-                    break
-            if match:
-                found = True
-                break
-        if found:
+        if s[:i].find(s[i:i + k]) != -1:
             k += 1
         else:
             c += 1
@@ -39,24 +29,15 @@ def _lz76_count(seq: np.ndarray) -> int:
     return c
 
 
-@njit(cache=True)
 def _rolling_lz76_njit(seq: np.ndarray, window: int, log2_alpha: float, step: int) -> np.ndarray:
-    """
-    完全在 numba 内完成滚动 LZ76，消除 Python 循环开销。
-
-    时间戳规则：out[i] 对应 seq[i-window+1 : i+1]（历史窗口），严格无前视。
-    out 前 window-1 个位置填 -1（调用方转为 nan）。
-    """
+    """滚动 LZ76。out[i] 对应 seq[i-window+1:i+1]，前 window-1 个位置填 -1。"""
     n = len(seq)
     out = np.full(n, -1.0)
+    log2n = np.log2(window)
     i = window - 1
     while i < n:
         c = _lz76_count(seq[i - window + 1: i + 1])
-        log2n = np.log2(window)
-        if log2_alpha == 1.0:   # binary: log2(2)=1
-            out[i] = c * log2n / window
-        else:
-            out[i] = c * log2_alpha * log2n / window
+        out[i] = c * log2n / window if log2_alpha == 1.0 else c * log2_alpha * log2n / window
         i += step
     return out
 

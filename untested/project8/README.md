@@ -16,7 +16,7 @@
 | BURST_TYPE_PROG_sell | 0.007 | 5.38 | 0.011 | 7.81 | 0.402 |
 | BURST_TYPE_SHOCK_buy | 0.006 | 4.12 | 0.013 | 8.80 | 0.446 |
 | LZ_highvol | -0.016 | -7.20 | -0.024 | -9.73 | 0.741 |
-
+其中，LZ_syntax_kl  LZ_multi相关性略高 -0.741234
 > IC_p1：多头组合 IC；IC_p1_p10：多空对冲 IC；IR：对应 ICIR；最大\|corr\|：与现有库因子的最大绝对相关性。
 
 ---

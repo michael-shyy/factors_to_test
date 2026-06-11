@@ -4,11 +4,16 @@ import pandas as pd
 import h5py
 import hdf5plugin
 
-os.environ['HDF5_PLUGIN_PATH'] = (
-    "/home/hysheng/.local/lib/python3.10/site-packages/hdf5plugin/plugins/"
-)
+_plugin = os.environ.get('HDF5_PLUGIN_PATH')
+if _plugin:
+    os.environ['HDF5_PLUGIN_PATH'] = _plugin
+else:
+    os.environ.setdefault(
+        'HDF5_PLUGIN_PATH',
+        '/home/hysheng/.local/lib/python3.10/site-packages/hdf5plugin/plugins/',
+    )
 
-L2_ROOT = "/home/sharedriver/public/Level2"
+L2_ROOT = os.environ.get('L2_ROOT', '/home/sharedriver/public/Level2')
 
 
 def get_file_path(date: str, stock_id: str) -> str:
