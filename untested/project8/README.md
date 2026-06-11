@@ -2,6 +2,47 @@
 
 # Project8 — 订单流因子构建逻辑文档
 
+---
+
+## 回测结果（20240102 – 20260424）
+
+以下为已通过初步筛选的优质因子（多头表现良好 + 最大相关性 ≤ ~75%）：
+
+| 因子 | IC_p1 | IR_p1 | IC_p1_p10 | IR_p1_p10 | 最大\|corr\| |
+|---|---|---|---|---|---|
+| LZ_diff | -0.019 | -10.69 | -0.027 | -15.32 | 0.498 |
+| LZ_syntax_kl | 0.015 | 8.17 | 0.025 | 12.46 | 0.604 |
+| LZ_multi | -0.015 | -7.65 | -0.025 | -12.07 | 0.642 |
+| BURST_TYPE_PROG_sell | 0.007 | 5.38 | 0.011 | 7.81 | 0.402 |
+| BURST_TYPE_SHOCK_buy | 0.006 | 4.12 | 0.013 | 8.80 | 0.446 |
+| LZ_highvol | -0.016 | -7.20 | -0.024 | -9.73 | 0.741 |
+
+> IC_p1：多头组合 IC；IC_p1_p10：多空对冲 IC；IR：对应 ICIR；最大\|corr\|：与现有库因子的最大绝对相关性。
+
+---
+
+## 待完成开发项
+
+### 代码层面未实现
+- **涡量因子（#22）**：[features/vorticity/](features/vorticity/) 目录已规划，尚未开发，工程复杂度最高
+- **复合因子 C2–C5**：[composite/](composite/) 下除 C1（已在 reynolds 中实现）外均未开发
+  - C2：有记忆毒性（ASI × Transfer Entropy）
+  - C3：坍缩-爆发时序耦合（条件概率）
+  - C4：LZ-涡量联合因子（依赖涡量因子）
+  - C5：探价效率联合因子（LZ × Re × BURST_TYPE_PROG）
+
+### 因子族部分模块缺失
+- **collapse**：`profile_deform.py`、`order_age.py`、`repost_tracker.py`、`spread_propagation.py`、`compete_ratio.py` 尚未实现
+- **burst_silence**：`trigger_feature.py`、`acceleration.py`、`cross_direction.py`、`silence_classifier.py`、`wait_rhythm.py`、`size_burst.py` 尚未实现
+- **mutual_info**：`source_split.py`、`curve_by_level.py`、`size_trigger_mi.py`、`conditional_mi.py`、`cca_analyzer.py`、`lag_mi.py`、`residual_mi.py`、`size_mi.py` 尚未实现
+
+### 评估与输出
+- `eval/` 模块（IC 计算、IC 衰减、因子筛选、报告生成）尚未开发
+- `pipeline/nova_exporter.py`（Nova 回测格式导出）尚未实现
+
+---
+
+
 
 
 > 实施顺序：\#16 LZ复杂度 → \#21 雷诺数复合 → \#26 坍缩不对称 → \#25 爆发\-静默 → \#28 盘口互信息 → \#22 涡量（备用）
